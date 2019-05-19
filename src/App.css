@@ -1,0 +1,9 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-image: linear-gradient(to right bottom, #4589908a, #4589904d),
+    url("./img/ev-232339-unsplash.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
