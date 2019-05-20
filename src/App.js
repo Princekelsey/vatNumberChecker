@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import VatRecord from "./components/VatRecord";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/navbar/NavBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
