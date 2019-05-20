@@ -1,4 +1,4 @@
-This project is a VAT Number Checker Web Application. It allows the user to input a VAT Number,
+This project is a VAT Number Checker Web Application built with Reactjs. It allows the user to input a VAT Number,
 and it checks the validity of the VAT number and returns the details of the VAT number if the VAT Number is valid.
 
 Access the App through https://vatnumber-checker.herokuapp.com/
