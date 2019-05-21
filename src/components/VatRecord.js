@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import axios from "axios";
 import VatDetailsDisplay from "./VatDetailsDisplay";
 import VatNumberInput from "./VatNumberInput";
+import Spinner from "./Spinner";
 
 class VatRecord extends Component {
   state = {
     vatNumber: "",
     record: [],
-    error: null
+    error: null,
+    isLoading: false
   };
 
   // handle the state and setState as input is been gotten
@@ -22,22 +24,24 @@ class VatRecord extends Component {
     if (this.state.vatNumber === "") {
       alert("Please Enter a VAT Number");
     }
+
     const newVatNumber = this.state.vatNumber;
 
     // check if there is a vat number to use for axios call
     if (newVatNumber) {
+      this.setState({ isLoading: true });
       axios
         .get(`https://vat.erply.com/numbers?vatNumber=${newVatNumber}`)
         .then(res => {
           // set the data gotten from the call to the state
           const newRecord = res.data;
           const updatedRecord = [...this.state.record, newRecord];
-          this.setState({ record: updatedRecord });
+          this.setState({ record: updatedRecord, isLoading: false });
         })
         .catch(err => {
           // check for error and  setState of error to response status
           if (err.response) {
-            this.setState({ error: err.response.status });
+            this.setState({ error: err.response.status, isLoading: false });
           }
         });
     }
@@ -50,7 +54,16 @@ class VatRecord extends Component {
   };
 
   render() {
-    const { vatNumber, record, error } = this.state;
+    const { vatNumber, record, error, isLoading } = this.state;
+    let loading = <Spinner />;
+    let display = (
+      <VatDetailsDisplay
+        record={record}
+        clearRecord={this.clearRecord}
+        error={error}
+      />
+    );
+
     return (
       <div className="mt-5 container ">
         <div className="row">
@@ -65,11 +78,9 @@ class VatRecord extends Component {
               vatNumber={vatNumber}
             />
 
-            <VatDetailsDisplay
-              record={record}
-              clearRecord={this.clearRecord}
-              error={error}
-            />
+            {!isLoading ? display : null}
+
+            {isLoading ? loading : null}
           </div>
         </div>
       </div>
