@@ -55,7 +55,7 @@ class VatRecord extends Component {
 
   render() {
     const { vatNumber, record, error, isLoading } = this.state;
-    let loading = <Spinner />;
+    let spinner = <Spinner />;
     let display = (
       <VatDetailsDisplay
         record={record}
@@ -80,7 +80,7 @@ class VatRecord extends Component {
 
             {!isLoading ? display : null}
 
-            {isLoading ? loading : null}
+            {isLoading ? spinner : null}
           </div>
         </div>
       </div>
